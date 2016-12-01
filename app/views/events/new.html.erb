@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @event.errors.any? %>
+  <% @event.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Event</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_event" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for title -->
+      <div class="form-group">
+        <label for="title" class="control-label">
+          Title
+        </label>
+
+        <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @event.title %>">
+      </div>
+
+      <!-- Label and input for host_id -->
+      <div class="form-group">
+        <label for="host_id" class="control-label">
+          Host
+        </label>
+
+        <input type="text" id="host_id" name="host_id" placeholder="Host" class="form-control" value="<%= @event.host_id %>">
+      </div>
+
+      <!-- Label and input for start -->
+      <div class="form-group">
+        <label for="start" class="control-label">
+          Start
+        </label>
+
+        <input type="text" id="start" name="start" placeholder="Start" class="form-control" value="<%= @event.start %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Event
+      </button>
+      or
+      <a href="/events">Cancel</a>
+    </form>
+  </div>
+</div>

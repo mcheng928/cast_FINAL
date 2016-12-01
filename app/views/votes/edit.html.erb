@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @vote.errors.any? %>
+  <% @vote.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Vote #<%= @vote.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_vote/<%= @vote.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for venue_id -->
+      <div class="form-group">
+        <label for="venue_id" class="control-label">
+          Venue
+        </label>
+
+        <input type="text" id="venue_id" name="venue_id" placeholder="Venue" class="form-control" value="<%= @vote.venue_id %>">
+      </div>
+
+      <!-- Label and input for event_id -->
+      <div class="form-group">
+        <label for="event_id" class="control-label">
+          Event
+        </label>
+
+        <input type="text" id="event_id" name="event_id" placeholder="Event" class="form-control" value="<%= @vote.event_id %>">
+      </div>
+
+      <!-- Label and input for vote -->
+      <div class="form-group">
+        <label for="vote" class="control-label">
+          Vote
+        </label>
+
+        <input type="text" id="vote" name="vote" placeholder="Vote" class="form-control" value="<%= @vote.vote %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Vote
+      </button>
+      or
+      <a href="/votes/<%= @vote.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
